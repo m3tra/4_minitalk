@@ -6,7 +6,7 @@
 /*   By: fporto <fporto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 19:27:11 by fporto            #+#    #+#             */
-/*   Updated: 2021/09/07 19:27:11 by fporto           ###   ########.fr       */
+/*   Updated: 2021/09/08 13:54:38 by fporto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,19 @@ void	sighandler(int signum)
 {
 	static int	flag = 1;
 
-	if (signum == SIGUSR2 && flag)
+	if (signum == SIGUSR2)
 	{
-		ft_putstr_fd("\nMessage sent ", 1);
-		flag = 0;
+		if (flag)
+		{
+			ft_putstr_fd("Sending message: ", 1);
+			flag = 0;
+		}
+		else
+			ft_putchar_fd('.', 1);
 	}
 	if (signum == SIGUSR1)
 	{
-		ft_putstr_fd("-> Message recieved \n", 1);
+		ft_putstr_fd("\nMessage recieved.\n", 1);
 		flag = 1;
 		exit(EXIT_SUCCESS);
 	}
@@ -46,10 +51,10 @@ void	send_bits(int pid, char *str)
 			if (str[i] & (0x80 >> bit))
 			{
 				if (kill(pid, SIGUSR2) == -1)
-					exit(1);
+					exit(EXIT_FAILURE);
 			}
 			else if (kill(pid, SIGUSR1) == -1)
-				exit(1);
+				exit(EXIT_FAILURE);
 			usleep(100);
 		}
 		if (!str[i])

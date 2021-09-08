@@ -6,13 +6,13 @@
 #    By: fporto <fporto@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/07 19:27:16 by fporto            #+#    #+#              #
-#    Updated: 2021/09/07 19:27:17 by fporto           ###   ########.fr        #
+#    Updated: 2021/09/08 14:17:20 by fporto           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # Name of the program built
-NAME_CLIENT		:=		client
-NAME_SERVER		:=		server
+NAME_CLIENT			:=		client
+NAME_SERVER			:=		server
 
 # Name directory
 PATH_SRC			:=		src
@@ -25,7 +25,6 @@ SRCS_CLIENT			:=		$(shell find $(PATH_SRC) -name client.c)
 OBJS_CLIENT			:=		$(SRCS_CLIENT:%.c=$(PATH_BUILD)/%.o)
 SRCS_SERVER			:=		$(shell find $(PATH_SRC) -name server.c)
 OBJS_SERVER			:=		$(SRCS_SERVER:%.c=$(PATH_BUILD)/%.o)
-# DEPS				:=		$(OBJS:.o=.d)
 INC_DIRS			:=		$(shell find $(PATH_INC) -type d)
 
 # Compiler
@@ -33,14 +32,14 @@ CC					:=		gcc
 
 # Flags - compilation
 FLAG_WARNING		:=		-Wall -Wextra -Werror
-FLAG_INC			:= 		$(addprefix -I, $(INC_DIRS))
+FLAG_INC			:=		$(addprefix -I, $(INC_DIRS))
 FLAG_MAKEFILE		:=		-MMD -MP
-FLAG_DEBUG			:= 		-g
+FLAG_DEBUG			:=		-g
 FLAG_OPTIMIZATION	:=		-O3
-FLAGS_COMP			:= 		$(FLAG_WARNING) -Ilibft -Iinc $(FLAG_MAKEFILE) $(FLAG_DEBUG) $(FLAG_OPTIMIZATION)
+FLAGS_COMP			:=		$(FLAG_WARNING) -Ilibft -Iinc $(FLAG_MAKEFILE) $(FLAG_DEBUG) $(FLAG_OPTIMIZATION)
 
 # Flags - memory leak check
-FLAG_MEM_LEAK		:= 		-fsanitize=address
+FLAG_MEM_LEAK		:=		-fsanitize=address
 
 # Flags - linking
 FLAG_LIBFT			:=		-L$(PATH_LIBFT) -lft
@@ -104,5 +103,3 @@ normC:
 norm:						normH normC
 
 .PHONY:						all clean fclean re
-
-# -include $(DEPS)

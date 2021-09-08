@@ -6,7 +6,7 @@
 /*   By: fporto <fporto@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/27 16:59:11 by fporto            #+#    #+#             */
-/*   Updated: 2021/08/12 21:18:24 by fporto           ###   ########.fr       */
+/*   Updated: 2021/09/08 13:46:58 by fporto           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@ void	ft_putstr_fd(char *str, int fd)
 {
 	size_t	len;
 
-	len = ft_strlen(str);
-	write(fd, str, len);
+	if (str)
+	{
+		len = ft_strlen(str);
+		write(fd, str, len);
+	}
 }
